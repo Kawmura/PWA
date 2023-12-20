@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/common.css">
+<title>PWAサンプル</title>
+</head>
+<body>
+  <h1 style="font-size: 40px;">PWAサンプル</h1>
+  <p style="font-size: 25px;">※スマートフォンのホーム画面に追加して使用してください</p>
+  <button onclick="notificationSample()" class="button">通知サンプル</button>
+  <br><br>
+  <button onclick="locationSample()" class="button" disabled>現在位置取得サンプル</button>
+</body>
+<script>
+  function locationSample(){
+    window.location.href="location.html";
+  }
+  function notificationSample(){
+    window.location.href="notification.html";
+  }
+</script>
+</html>

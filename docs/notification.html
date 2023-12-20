@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/common.css">
+<title>位置情報取得</title>
+</head>
+<body>
+  <h1 style="font-size: 40px;">通知サンプル</h1>
+  <p style="font-size: 25px;">入力した文章を通知メッセージにできます
+    <br>
+    ※通知許可ボタンより通知を許可してください
+  </p>
+
+  <button id="notification_confirm" class="button">通知許可</button>
+  <br>
+  <input type="text" id="message" style="width: 500px;font-size: 25px;" placeholder="通知メッセージ">
+  <br>
+  <button id="send" class="button" disabled>通知を出す</button>
+
+  <button id="returnHome" onclick="returnHome()">ホームに戻る</button>
+
+  <script>
+
+    document.getElementById('notification_confirm').addEventListener('click', () => {
+      Notification.requestPermission().then(permission => {
+        //alert(permission); // granted or denied
+        document.getElementById("notification_confirm").textContent = "通知許可ありがとうございます";
+        document.getElementById("send").disabled = false;
+      });
+    });
+
+    // ServiceWorkerの登録
+    window.addEventListener('load', () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('service-worker.js')
+          .then(registration => console.log('registered', registration))
+          .catch(error => console.log('error', error));
+      }
+    });
+
+    // 通知の送信
+    document.getElementById('send').addEventListener('click', () => {
+      if (Notification.permission === 'granted') {
+
+        var message = document.getElementById("message").value;
+
+        if(message.trim() == ""){
+          message = "メッセージ未入力";
+        }
+
+        navigator.serviceWorker.ready.then(registration => {
+          registration.active.postMessage(message);
+        });
+      }
+    });
+
+    function returnHome() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

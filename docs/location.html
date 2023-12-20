@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/common.css">
+<title>位置情報取得</title>
+</head>
+<body>
+  <h1 style="font-size: 40px;">現在位置取得サンプル</h1>
+  <p style="font-size: 25px;">現在位置を取得してgoogleMapに反映させます
+    <br>
+    ※位置情報の利用を許可してください
+  </p>
+
+  <button class="button" onclick="getCurrentLocation()">現在位置を取得</button>
+  <p id="location" style="font-size: 25px;">
+    緯度:
+    <br>
+    経度:
+  </p>
+  <div id="map"></div>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+  </script>
+  <script src="location.js"></script>
+
+  <button id="returnHome" onclick="returnHome()">ホームに戻る</button>
+
+</body>
+<script>
+  function returnHome(){
+    window.location.href="index.html";
+  }
+</script>
+</html>
